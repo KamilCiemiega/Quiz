@@ -1,49 +1,111 @@
-import React, { Component } from 'react';
+import React, { useEffect, useReducer } from 'react';
+import ListOfQuestions from './ListOfQuestions';
+import Results from './Results';
 
-export default class Main extends Component {
+const Main = props => {
 
-        state = {
-            score: 0,
-            current: 1
+    const httpReducer = (curHttpState, action) => {
+        switch (action.type) {
+          case 'SEND':
+            return { ...curHttpState,
+                loading: true, 
+                error: null 
+            };
+          case 'RESPONSE':
+            return { ...curHttpState, loading: false };
+          case 'ADD':
+            return {...curHttpState, data: action.data};
+          case 'ERROR':
+            return { ...curHttpState, 
+                loading: false, 
+                error: action.errorMessage 
+            };
+          case 'CLEAR':
+            return { ...curHttpState, error: null };
+          default:
+            throw new Error('Should not be reached!');
         }
+    };
+    const questionReducer = (curquestionState, action) => {
+        switch (action.type) {
+          case 'SET_CURRENT':
+            return {...curquestionState, current:action.current};
+        case 'SET_SCORE':
+            return {...curquestionState, score:action.score};
+          default:
+            throw new Error('Should not be reached!');
+        }
+    };
+
+    const [questionState, dispatch] = useReducer(questionReducer,{ 
+        score: 0, current: 1 
+    });
+    const [httpState, dispatchHttp] = useReducer(httpReducer, {
+        data: [],
+        loading: false,
+        error: null
+    })
     
+    useEffect(() => {
+        dispatchHttp({ type: 'SEND' });
+        fetch('http://localhost:3000/generalKnowledge')
+            .then(resp => {
+                dispatchHttp({ type: 'RESPONSE' });
+                return resp.json()
+            })
+            .then(data => {
+                dispatchHttp({
+                    type: 'ADD',
+                    data: data
+                })
+            })
+            .catch(err => {
+                dispatchHttp({ 
+                    type: 'ERROR', 
+                    errorMessage: 'Something went wrong!' 
+                });
+                console.log(err)
+            });
+    }, []);
 
-    setCurrent = (current) => {
-        this.setState({current});
-    }
+        const setCurrent = (current) => {
+            dispatch({
+                type:'SET_CURRENT', 
+                current 
+            });
+        }
 
-    setScore = (score) => {
-        this.setState({score});
-    }
+        const setScore = (score) => {
+            dispatch({ 
+                type:'SET_SCORE',
+                score 
+            });
+        }
 
-    render() {
-        // if (this.state.current > dataArray.length) {
-        //     return (
-        //         <div>
-        //             <div className="flex-box">
-        //                 <Results dataArray={dataArray}
-        //                          setScore={this.setScore} setCurrent={this.setCurrent} {...this.state}/>
+        if (questionState.current > httpState.data.length) {
+            return (
+                <Results score={questionState.score} />
+            );
+        }
+        
 
-        //             </div>
-        //             <div className="iconFooter flex-box">
-
-        //                 <i class="fab fa-facebook-square"></i>
-        //                 <i className="fab fa-instagram"></i>
-        //                 <i class="fab fa-twitter-square"></i>
-        //             </div>
-        //             <Footer/>
-        //         </div>
-        //     );
-        // }
         return (
             <div className="container">
-                {/* <QuestionCounter className="questionCounter" dataArray={dataArray}
-                                 setCurrent={this.setCurrent} {...this.state} />
-                <ListOfQuestions dataArray={dataArray} setScore={this.setScore}
-                                 setCurrent={this.setCurrent} {...this.state} />
-                <Footer/> */}
-                hello from main
+                <div className="container-questions">
+                    {
+                        httpState.data.map(question => {
+                            if (questionState.current === question.id)
+                                return <ListOfQuestions
+                                    setScore={setScore} setCurrent={setCurrent}
+                                    question={question} key={question.id} 
+                                    questionState ={questionState} />
+                        })
+                    }
+                </div>
             </div>
         );
-    }
+        
 }
+
+export default Main;
+

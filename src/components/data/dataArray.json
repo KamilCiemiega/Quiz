@@ -1,0 +1,114 @@
+{
+  "generalKnowledge": [
+    {
+      "id": 1,
+      "question": "Virgin Trains, Virgin Atlantic and Virgin Racing, are all companies owned by which famous entrepreneur?",
+      "answers": [
+        "Alan Sugar",
+        "Richard Branson",
+        "Donald Trump",
+        "Bill Gates"
+      ],
+      "correct": 1
+    },
+    {
+      "id": 2,
+      "question": "Area 51 is located in which US state?",
+      "answers": [
+        "Arizona",
+        "New Mexico",
+        "Nevada",
+        "Utah"
+      ],
+      "correct": 2
+    },
+    {
+      "id": 3,
+      "question": "What is the largest organ of the human body?",
+      "answers": [
+        "Heart",
+        "large Intestine",
+        "Skin",
+        "Liver"
+      ],
+      "correct": 2
+    },
+    {
+      "id": 4,
+      "question": "What is the name of the Jewish New Year?",
+      "answers": [
+        "Elul",
+        "New Year",
+        "Rosh Hashanah",
+        "Succoss"
+      ],
+      "correct": 2
+    },
+    {
+      "id": 5,
+      "question": "How many colors are there in a rainbow?",
+      "answers": [
+        "8",
+        "9",
+        "7",
+        "10"
+      ],
+      "correct": 2
+    },
+    {
+      "id": 6,
+      "question": "Five dollars is worth how many nickles?",
+      "answers": [
+        "100",
+        "50",
+        "25",
+        "69"
+      ],
+      "correct": 0
+    },
+    {
+      "id": 7,
+      "question": "What machine element is located in the center of fidget spinners?",
+      "answers": [
+        "Bearings",
+        "Axles",
+        "Gears",
+        "Belts"
+      ],
+      "correct": 0
+    },
+    {
+      "id": 8,
+      "question": "Which of the following presidents is not on Mount Rushmore?",
+      "answers": [
+        "John F. Kennedy",
+        "Theodore Roosevelt",
+        "Abraham Lincoln",
+        "Thomas Jefferson"
+      ],
+      "correct": 0
+    },
+    {
+      "id": 9,
+      "question": "Which country, not including Japan, has the most people of japanese decent?",
+      "answers": [
+        "China",
+        "South Korea",
+        "United States of America",
+        "Brazil"
+      ],
+      "correct": 3
+    },
+    {
+      "id": 10,
+      "question": "The likeness of which president is featured on the rare $2 bill of USA currency?",
+      "answers": [
+        "Martin Van Buren",
+        "Ulysses Grant",
+        "Thomas Jefferson",
+        "John Quincy Adams"
+      ],
+      "correct": 2
+    }
+  ]
+}

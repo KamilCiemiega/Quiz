@@ -4,6 +4,10 @@
 @import './settings/mixins';
 @import './settings/flex';
 @import './components/home';
+@import './components/questionsMain';
+@import './components/listOfQuestions';
+@import './components/results';
+@import './components/worldScore';
 body{
     font-family: $font-base;
     font-size: 24px;

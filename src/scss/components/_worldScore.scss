@@ -1,0 +1,45 @@
+.score{
+    width: 100%;
+    height: 100vh;
+    background: #242931;
+    @include centralize;
+    flex-direction: column;
+    &-img{
+        background-image: url(../../assets/winner.png);
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        width: 150px;
+        height: 150px;
+    }
+    & h2 {
+        color: $title;
+        margin-top: 10px;
+    }
+    &-results{
+        margin-top: 10px;
+        @include centralize;
+        flex-direction: column;
+        width: 100%;
+        &:after {
+            content: "";
+            height: 1px;
+            background-color:#1a1b2e;
+            width: 50%;
+            margin-top: 10px;
+        } 
+        &-summary{
+            width: 100%;
+            @include centralize;
+            p:nth-child(2){
+                margin-left: 20px;
+            }
+            p:nth-child(3){
+                margin-left: 190px;
+            }
+            & p {
+                color: $title;
+            }
+        }
+    }
+}
