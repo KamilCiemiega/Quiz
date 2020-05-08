@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-
+import Loader from './Loader';
 
 const ListOfQuestions = props => {
 
@@ -25,6 +25,8 @@ const ListOfQuestions = props => {
     }
 
     return (
+        <>
+        {props.loading ? <Loader /> :
         <div className="question-text flex">
             <div className="question-text-header flex">
                 <div className="question-text-header-score flex">
@@ -74,6 +76,8 @@ const ListOfQuestions = props => {
                 </li>
             </ul>
         </div>
+        }
+        </>
     );
 }
 

@@ -32,10 +32,13 @@
             width: 100%;
             @include centralize;
             p:nth-child(2){
-                margin-left: 20px;
+                margin-left: 10px;
             }
             p:nth-child(3){
-                margin-left: 190px;
+                margin-left: 15px;
+            }
+            p:nth-child(4){
+                margin-left: 35px;
             }
             & p {
                 color: $title;

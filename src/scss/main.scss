@@ -8,6 +8,9 @@
 @import './components/listOfQuestions';
 @import './components/results';
 @import './components/worldScore';
+@import './components/loader';
+@import './components/errorModal';
+
 body{
     font-family: $font-base;
     font-size: 24px;

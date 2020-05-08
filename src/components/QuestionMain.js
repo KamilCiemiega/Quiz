@@ -1,9 +1,10 @@
 import React, { useEffect, useReducer } from 'react';
 import ListOfQuestions from './ListOfQuestions';
 import Results from './Results';
+import ErrorModal from './ErrorModal';
+
 
 const Main = props => {
-
     const httpReducer = (curHttpState, action) => {
         switch (action.type) {
           case 'SEND':
@@ -12,20 +13,21 @@ const Main = props => {
                 error: null 
             };
           case 'RESPONSE':
-            return { ...curHttpState, loading: false };
+            return {...curHttpState, loading: false };
           case 'ADD':
             return {...curHttpState, data: action.data};
           case 'ERROR':
-            return { ...curHttpState, 
+            return {...curHttpState, 
                 loading: false, 
                 error: action.errorMessage 
             };
-          case 'CLEAR':
-            return { ...curHttpState, error: null };
+            case 'CLEAR':
+                return { ...curHttpState, error: null };
           default:
             throw new Error('Should not be reached!');
         }
     };
+    
     const questionReducer = (curquestionState, action) => {
         switch (action.type) {
           case 'SET_CURRENT':
@@ -64,9 +66,12 @@ const Main = props => {
                     type: 'ERROR', 
                     errorMessage: 'Something went wrong!' 
                 });
-                console.log(err)
             });
     }, []);
+
+        const clearError = () => {
+            dispatchHttp({ type: 'CLEAR' });
+        };
 
         const setCurrent = (current) => {
             dispatch({
@@ -91,17 +96,22 @@ const Main = props => {
 
         return (
             <div className="container">
+                {httpState.error ?
+                     <ErrorModal onClose={clearError}>{httpState.error}</ErrorModal>
+                     :
                 <div className="container-questions">
-                    {
-                        httpState.data.map(question => {
-                            if (questionState.current === question.id)
-                                return <ListOfQuestions
-                                    setScore={setScore} setCurrent={setCurrent}
-                                    question={question} key={question.id} 
-                                    questionState ={questionState} />
-                        })
-                    }
+                        {
+                            httpState.data.map(question => {
+                                if (questionState.current === question.id)
+                                    return <ListOfQuestions
+                                        setScore={setScore} setCurrent={setCurrent}
+                                        question={question} key={question.id} 
+                                        questionState ={questionState} loading={httpState.loading}/>
+                            })
+                        }
                 </div>
+                }
+                
             </div>
         );
         

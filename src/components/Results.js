@@ -1,24 +1,19 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { useForm } from 'react-hook-form';
 
 const Result = props => {
 
-    const [value, setValue] = useState({nickName:'',score:'',err:''});
+    const { register, errors, handleSubmit } = useForm();
 
-    const handleChange = event => {
-        setValue({
-            nickName:event.target.value,
-            score:props.score
-        });
-    }
-
-    const handleFormSubmit = (e) => {
-        e.preventDefault();
-        if(value.nickName.length == 0){
-            setValue({err:'Enter the name'})
+    const onSubmit = data => {
+        const obj = {
+            nickName: data.nickName,
+            score: props.score
         }
-        localStorage.setItem('results', JSON.stringify(value));
-        
-        console.log(localStorage)
+        const arr = []
+        arr.push(obj)
+        console.log(arr)
+        localStorage.setItem('results', JSON.stringify(arr));
     }
 
     return (
@@ -36,14 +31,19 @@ const Result = props => {
                 </div>
                 <form
                     className="result-main-form flex"
-                    onSubmit={handleFormSubmit}>
+                    onSubmit={handleSubmit(onSubmit)}>
                     <input
                         type="text"
                         placeholder=" Save your score"
-                        value={value.nickName}
-                        onChange={handleChange}
+                        name="nickName"
+                        ref={register({ required: true })}
                     >
                     </input>
+                    {errors.nickName &&
+                        <div className="error flex">
+                            {errors.nickName && "nickName is required !"}
+                        </div>
+                    }
                     <button
                         type="submit"
                         className="btn-save"

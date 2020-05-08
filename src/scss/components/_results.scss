@@ -80,7 +80,8 @@
             height: 50px;
             background: #00ac92;            
             font-size: 1.2rem;
-            margin-top: 30px;
+            margin-top: 20px;
+            margin-bottom: 10px;
             a {
                 text-decoration: none;
                 color: $title;
@@ -92,6 +93,17 @@
             background: #323841;
             margin-top: 35px;
         }
+    }
+    .error{
+        @include centralize;
+        margin:10px 0 ;
+        width: 200px;
+        height: 30px;
+        background: #f8978c;
+        color: #c62828;
+        font-size: 1rem;
+        border-radius: 5px;
+        font-weight: bold;
     }
     
 }
