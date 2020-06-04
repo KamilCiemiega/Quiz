@@ -1,19 +1,24 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
 const Result = props => {
 
+    const [score, setScore] = useState([])
     const { register, errors, handleSubmit } = useForm();
 
     const onSubmit = data => {
-        const obj = {
+        // const obj = {
+        //     nickName: data.nickName,
+        //     score: props.score
+        // }
+        // const arr = []
+        // arr.push(obj)
+        // console.log(arr)
+        setScore([...score,{
             nickName: data.nickName,
             score: props.score
-        }
-        const arr = []
-        arr.push(obj)
-        console.log(arr)
-        localStorage.setItem('results', JSON.stringify(arr));
+        }])
+        localStorage.setItem('results', JSON.stringify(score));
     }
 
     return (
